@@ -1,0 +1,31 @@
+Acc1 => aakashdeveloper  (Sender1)
+=>IAM
+ =>Role
+    => Another AWS Account
+        => Account ID of ****Reciver****
+            =>RoleName
+
+
+
+Acc2=> AAkash HAnda (Reciver)
+** Root User Cannot Access from another Account
+** Only IAM user can talk to another Account
+   => Create New User(With no permission no group)
+   => Create New DummyGroup(no user no policy)
+        => Select group
+            => permission tab
+                => InlinePolices
+                    =>{
+                            "Version":"2012-10-17",
+                            "Statement":{
+                                "Effect":"Allow",
+                                "Action":"sts:AssumeRole",
+                                "Resource":"arn:aws:iam::539889331520:role/ExternalS3Access"
+                                //Add arn of role of sender account
+                            }
+                        }
+                    => Add user to the group
+    => Login to IAM user
+    =>Click on switch role
+    =>Enter account Id of Sender
+    =>Enter role name created in sender
